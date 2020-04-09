@@ -1,0 +1,42 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env", // @babel/preset-env 把ES6 翻译成 ES5 语法
+      {
+        /**
+          false: 此时不对 polyfill 做操作。如果引入 @babel/polyfill，则无视配置的浏览器兼容，引入所有的 polyfill
+          entry: 根据配置的浏览器兼容，引入浏览器不兼容的 polyfill。需要在入口文件手动添加 import '@babel/polyfill'，会自动根据 browserslist 替换成浏览器不兼容的所有 polyfill
+          usage: 根据配置的浏览器兼容，以及你代码中用到的 API 来进行 polyfill，实现了按需添加。
+        */
+        "useBuiltIns": "usage",
+        "corejs": 2,
+        "targets": {  // 如果浏览器已经大于这些版本，babel转译就不用执行了
+          "firefox": "60",
+          "chrome": "67",
+          "safari": "11.1"
+        }
+      }
+    ],
+    "@babel/preset-react"
+  ],
+  "plugins": [
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-transform-runtime"
+  ]
+}
+
+// 如果是需要打包组件库，避免全局污染可用下面这种配置
+// npm install --save @babel/runtime-corejs2
+// { 
+//   "plugins": [
+//     [
+//       "@babel/plugin-transform-runtime",
+//       {
+//         "corejs": 2,
+//         "helpers": true,
+//         "regenerator": true,
+//         "useESModules": false,
+//       }
+//     ]
+//   ]
+// }
