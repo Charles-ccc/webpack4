@@ -50,7 +50,17 @@ module.exports = {
 			_: 'lodash'  // 如果一个模块中使用了 _ ， 就会自动引入 lodash 库，然后把 lodash 赋值给 _
 		})
 	],
-	performance: false, // 去掉一些性能警告
+	performance: {
+    // 可选 warning、error、false
+    // false：性能设置,文件打包过大时，不报错和警告，只做提示
+    // warning：显示警告，建议用在开发环境
+    // error：显示错误，建议用在生产环境，防止部署太大的生产包，从而影响网页性能
+    hints: false
+	},
+	// 打包时排除 lodash 模块
+  externals: {
+    lodash: 'lodash'
+  },
 	optimization: {
 		// 如果低版本webpack，在未修改的代码时，打包出来的contenthash却不同的时候做该配置，会生成一个runtime文件
 		// runtime 文件存放的是打包出来的业务代码和库代码之间的关联代码。里面不再存在manifest
@@ -94,6 +104,23 @@ module.exports = {
 	},
 	output: {
 		// publicPath: '/', // 配置打包出来的html中对于打包后的js的引用地址前缀
+		// path 必须是绝对路径
 		path: path.resolve(__dirname, '../dist')  // path.resolve(__dirname, 'dist')
+		// [name] 为 entry 配置的 key，除此之外，还可以是 [id] （内部块 id ）、 [hash]、[contenthash] 等
+		// filename: '[name].js'
+		// 一旦设置后该 bundle 将被处理为 library
+    // library: 'webpackNumbers',
+    // export 的 library 的规范，有支持 var, this, commonjs,commonjs2,amd,umd
+    // libraryTarget: 'umd',
 	}
 }
+
+/**
+ * 
+ * hash
+		build-specific， 哈希值对应每一次构建（ Compilation ），即每次编译都不同，即使文件内容都没有改变，并且所有的资源都共享这一个哈希值，此时，浏览器缓存就没有用了，可以用在开发环境，生产环境不适用。
+	chunkhash
+		chunk-specific， 哈希值对应于 webpack 每个入口点，每个入口都有自己的哈希值。如果在某一入口文件创建的关系依赖图上存在文件内容发生了变化，那么相应入口文件的 chunkhash 才会发生变化，适用于生产环境
+	contenthash
+		content-specific，根据包内容计算出的哈希值，只要包内容不变，contenthash 就不变，适用于生产环境
+ */

@@ -61,7 +61,8 @@ const prodConfig = {
 	output: {
 		// 处理线上代码的浏览器缓存
 		// 源代码改变，打包生成的contenthash也跟着改变
-    filename: '[name].[contenthash].js',
+		filename: '[name].[contenthash].js',
+		// 公共块名，非入口，第三方库
 		chunkFilename: '[name].[contenthash].js',
   }
 }
