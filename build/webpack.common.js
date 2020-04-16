@@ -46,9 +46,9 @@ module.exports = {
 		new CleanWebpackPlugin(['dist'], {
 			root: path.resolve(__dirname, '../')
 		}),
-		new webpack.ProvidePlugin({
-			_: 'lodash'  // 如果一个模块中使用了 _ ， 就会自动引入 lodash 库，然后把 lodash 赋值给 _
-		})
+		// new webpack.ProvidePlugin({
+		// 	_: 'lodash'  // 如果一个模块中使用了 _ ， 就会自动引入 lodash 库，然后把 lodash 赋值给 _
+		// })
 	],
 	performance: {
     // 可选 warning、error、false
