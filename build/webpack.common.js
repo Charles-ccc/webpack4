@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = {
 	entry: {
@@ -15,10 +15,10 @@ module.exports = {
 			use: [
 				{
 					loader: 'babel-loader'
-				},
-				{
-					loader: 'imports-loader?this=>window'  // 安装 imports-loader ，原本this是指向模块自身。该配置将该模块this 指向 window
 				}
+				// {
+				// 	loader: 'imports-loader?this=>window'  // 安装 imports-loader ，原本this是指向模块自身。该配置将该模块this 指向 window
+				// }
 			]
 		}, {
 			test: /\.(jpg|png|gif)$/,

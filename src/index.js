@@ -14,19 +14,20 @@
 // 异步加载第三方库，放入单独的文件
 // 通过 import 还能实现模块代码懒加载
 // 使用 import ，因为是 promise，所以必须使用 babel-polyfill
-async function getComponent() {
-  const { default: _ } = await import(/* webpackChunkName:"lodash" */'lodash')
-  const element = document.createElement('div')
-  element.innerHTML = _.join(['Derrick', 'Liu'], '***')
-  return element
-}
+// async function getComponent() {
+//   const { default: _ } = await import(/* webpackChunkName:"lodash" */'lodash')
+//   const element = document.createElement('div')
+//   element.innerHTML = _.join(['Derrick', 'Liu'], '***')
+//   return element
+// }
 
-document.addEventListener('click', () => {
-  getComponent().then(element => {
-    document.body.appendChild(element)
-  })
-})
+// document.addEventListener('click', () => {
+//   getComponent().then(element => {
+//     document.body.appendChild(element)
+//   })
+// })
 
+console.log('hello world')
 
 // /* webpackPrefetch: true */ 网络闲时加载
 // 利用缓存来提升性能比较有限，应该考虑如何使页面加载代码利用率更高
