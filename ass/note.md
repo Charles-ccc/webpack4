@@ -172,3 +172,9 @@
       plugins: []
     }
 ```
+
+#### PWA
+离线环境下，可以通过配置 workbox-webpack-plugin 来达到PWA离线效果，使web依然能够正常访问。<br/>
+只需要在生产环境中配置即可，开发环境不必关注。 <br/>
+配置后之后再打包会多出两个文件，service-worker.js 是 Service Worker 文件，precache-manifest.b5ca1c555e832d6fbf9462efd29d27eb.js 是 service-worker.js 引用的文件，所以它也可以运行。<br/>
+当然，除此之外，还需要写一部分业务代码带最终生效。

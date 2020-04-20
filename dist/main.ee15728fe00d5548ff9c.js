@@ -27,7 +27,7 @@
 //     document.body.appendChild(element)
 //   })
 // })
-console.log('hello world'); // /* webpackPrefetch: true */ 网络闲时加载
+// /* webpackPrefetch: true */ 网络闲时加载
 // 利用缓存来提升性能比较有限，应该考虑如何使页面加载代码利用率更高
 // 通过command + shift + p 查看加载的文件使用率
 // document.addEventListener('click', () => {
@@ -38,7 +38,18 @@ console.log('hello world'); // /* webpackPrefetch: true */ 网络闲时加载
 // })
 // css 文件拆分和合并，压缩
 // import './style.css'
+console.log('hello world');
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js').then(registration => {
+      console.log('service-worker registed', registration);
+    }).catch(error => {
+      console.log('service-worker register error', error);
+    });
+  });
+}
 
 /***/ })
 ],[[0,1]]]);
-//# sourceMappingURL=main.32923e8842a43424fd48.js.map
+//# sourceMappingURL=main.ee15728fe00d5548ff9c.js.map

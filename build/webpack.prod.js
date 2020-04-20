@@ -1,10 +1,12 @@
+// 由于 mini-css-extract-plugin 不支持 HMR，所以只在prod环境使用
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+// 合并和压缩css文件
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+// 配置渐进式网络程序（PWA）
+const WorkboxPlugin = require('workbox-webpack-plugin')
+
 const merge = require('webpack-merge');
 const commonConfig = require('./webpack.common')
-
-// 由于 mini-css-extract-plugin 不支持 HMR，所以只在prod环境使用
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-// 合并和压缩css文件
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const prodConfig = {
 	mode: 'production',	// 打包代码会被压缩
@@ -38,8 +40,13 @@ const prodConfig = {
 	plugins: [
     new MiniCssExtractPlugin({
       filename: "[name].css",
-      chunkFilename: "[name].css"
-    })
+      chunkFilename: "[name].chunk.css"
+		}),
+		new WorkboxPlugin.GenerateSW({
+			// ServiceWorkers
+			clientsClaim: true,
+     	skipWaiting: true
+		})
 	],
 	optimization: {
     minimizer: [
